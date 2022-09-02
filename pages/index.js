@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import styles from '../styles/Home.module.css';
+
 import Banner from '../components/banner';
 import Card from '../components/card';
-import styles from '../styles/Home.module.css';
+
+import coffeeStores from '../data/coffee-stores.json';
 
 export default function Home() {
 	const handleOnBannerBtnClick = () => {
@@ -28,11 +31,19 @@ export default function Home() {
 						width={700}
 						height={400}
 					/>
-					<Card
-						name='Dark Horse Coffee'
-						imgUrl='/static/hero-image.png'
-						href='/coffee-store/darkhorse-coffee'
-					/>
+					<div className={styles.cardLayout}>
+						{coffeeStores.map((coffeeStore) => {
+							return (
+								<Card
+									key=''
+									className={styles.card}
+									name={coffeeStore.name}
+									imgUrl={coffeeStore.imgUrl}
+									href={`/coffee-store/${coffeeStore.id}`}
+								/>
+							);
+						})}
+					</div>
 				</div>
 			</main>
 
